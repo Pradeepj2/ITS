@@ -22,14 +22,7 @@ public class AppConfig {
 	@Autowired
 	CustomUserDetailsService customUserDetailsService;
 
-//	@Bean
-//	public UserDetailsService userDetailsService(){
-//	UserDetails u1 = User.builder().username("pradeeprathor3110@gmail.com").password(passwordEncoder().encode("abc")).build();
-//	return new InMemoryUserDetailsManager(u1);
-//	
-//	
-//	}
-	
+ 
 	
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {

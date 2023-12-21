@@ -1,5 +1,7 @@
 package com.ITS.ITS.Controller;
 
+import java.util.Random;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ITS.ITS.Entity.JwtRequest;
 import com.ITS.ITS.Entity.JwtResponse;
 import com.ITS.ITS.Security.JwtHelper;
+import com.ITS.ITS.Services.UsersServices;
 
 @RestController
 @RequestMapping("/auth")
@@ -29,6 +32,9 @@ public class AuthController {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private UsersServices usersServices;
 
 	@Autowired
 	private AuthenticationManager manager;
@@ -40,20 +46,33 @@ public class AuthController {
 
 	@PostMapping("/login")
 	public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
-
+ 
 		this.doAuthenticate(request.getEmail(), request.getPassword());
 
 		UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+	
+		
 		String token = this.helper.generateToken(userDetails);
+		
+		String emailString = userDetails.getUsername();
+		
+		     Random random = new Random();
+	        // Generate a random 6-digit number
+	        int count = random.nextInt(999999 - 100000 + 1) + 100000;
 
-		JwtResponse response = new JwtResponse.Builder().jwtToken(token).username(userDetails.getUsername()).build();
+		token += "rjglei%ddspradeepgh#ffh344dg22765wwdvb" + count;
+		usersServices.setUniqueCode(count , emailString);
+
+		JwtResponse response = new JwtResponse.Builder().jwtToken(token).username(emailString).build();
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	private void doAuthenticate(String email, String password) {
+		System.err.println("outside the doauthanticate");
 
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
 		try {
+			System.err.println("inside the doauthanticate");
 			manager.authenticate(authentication);
 			
 

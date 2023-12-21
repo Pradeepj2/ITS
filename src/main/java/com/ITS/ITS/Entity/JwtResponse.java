@@ -1,15 +1,18 @@
 package com.ITS.ITS.Entity;
 
+
 public class JwtResponse {
 
 
     private String token;
     private String email;
+   // private int uniqueCode;
 
     // Private constructor to force usage of the builder
-    private JwtResponse(String token, String email) {
+    private JwtResponse(String token, String email  ) {
         this.token = token;
         this.email = email;
+    
     }
 
     public String getToken() {
@@ -19,11 +22,15 @@ public class JwtResponse {
     public String getEmail() {
         return email;
     }
+//    public int  getCount() {
+//    	return uniqueCode;
+//    }
 
 //     Builder class for JwtResponse
     public static class Builder {
         private String token;
         private String email;
+       // private int uniqueCode;
 
         public Builder jwtToken(String token) {
             this.token = token;
@@ -34,9 +41,14 @@ public class JwtResponse {
             this.email = email;
             return this;
         }
+//        public Builder uniqueCode(int code) {
+//        	this.uniqueCode = code;
+//        	return this;
+//        }
 
         public JwtResponse build() {
-            return new JwtResponse(this.token, this.email);
+         
+           return new JwtResponse(this.token , this.email); 
         }
     }
 }

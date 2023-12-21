@@ -28,4 +28,5 @@ public interface UsersServices {
 	public Users updateUserByfield(int id,Map<String , Object> mp);
 	
 	public int getCount(String email);
+	public void setUniqueCode(int i, String emailString);
 } 

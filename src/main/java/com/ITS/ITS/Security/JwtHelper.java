@@ -51,6 +51,7 @@ public class JwtHelper {
 
 	// generate token for user
 	public String generateToken(UserDetails userDetails) {
+		System.err.println("this is from generated token file");
 		Map<String, Object> claims = new HashMap<>();
 		return doGenerateToken(claims, userDetails.getUsername());
 	}

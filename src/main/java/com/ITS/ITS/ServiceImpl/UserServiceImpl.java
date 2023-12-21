@@ -12,17 +12,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Properties;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-import org.aspectj.weaver.patterns.IScope;
-import org.modelmapper.internal.bytebuddy.asm.Advice.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
@@ -173,6 +162,12 @@ public class UserServiceImpl implements UsersServices {
 	@Override
 	public int getCount(String email) {
 		return usersDao.getCount(email);
+	}
+
+	@Override
+	public void setUniqueCode(int incrementCount, String emailString) {
+		usersDao.setUniqueCode(incrementCount , emailString);
+		
 	}
 
 	 
